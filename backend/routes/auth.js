@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// @route GET api/auth/me
+// route GET api/auth/me
 // Get authenticated user's data
 router.get('/me', auth, async (req, res) => {
   try {
