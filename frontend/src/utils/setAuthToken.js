@@ -1,4 +1,3 @@
-// frontend/src/utils/setAuthToken.js
 import axios from 'axios';
 
 const setAuthToken = token => {

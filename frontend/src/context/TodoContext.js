@@ -52,7 +52,7 @@ export const TodoProvider = ({ children }) => {
     }
   };
 
-  // Add new todo with a deadline
+  // Add new todo 
 const addTodo = async todoData => {
   try {
     const res = await axios.post('/api/todos', todoData);

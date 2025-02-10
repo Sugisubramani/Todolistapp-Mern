@@ -1,4 +1,3 @@
-// backend/routes/auth.js
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -7,7 +6,7 @@ const User = require('../models/User');
 const auth = require('../middleware/auth');
 require('dotenv').config();
 
-// @route    POST api/auth/register
+// route POST api/auth/register
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -31,7 +30,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// @route    POST api/auth/login
+// route POST api/auth/login
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -54,8 +53,8 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// @route    GET api/auth/me
-// @desc     Get authenticated user's data
+// @route GET api/auth/me
+// Get authenticated user's data
 router.get('/me', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password'); 

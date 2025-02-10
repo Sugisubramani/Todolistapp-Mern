@@ -1,12 +1,10 @@
-// backend/routes/todos.js
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const Todo = require('../models/Todo');
 const mongoose = require('mongoose');
 
-// @route    GET api/todos
-// @desc     Get all todos for the authenticated user
+// Get all todos for the authenticated user
 router.get('/', auth, async (req, res) => {
   try {
     const todos = await Todo.find({ user: req.user.id }).sort({ createdAt: -1 });
@@ -17,20 +15,18 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// Creating a New Todo
 router.post('/', auth, async (req, res) => {
   const { title, deadline } = req.body;
-
-  console.log('Received data from frontend:', req.body); 
-
+  console.log('Received data from frontend:', req.body);
   try {
     const newTodo = new Todo({
       title,
-      deadline: deadline ? new Date(deadline) : null, 
+      deadline: deadline ? new Date(deadline) : null,
       user: req.user.id
     });
-
     const todo = await newTodo.save();
-    console.log('Saved todo:', todo); 
+    console.log('Saved todo:', todo);
     res.json(todo);
   } catch (err) {
     console.error('POST /api/todos error:', err.message);
@@ -38,8 +34,7 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-
-// @route PUT api/todos/:id
+//  Updating a Todo
 router.put('/:id', auth, async (req, res) => {
   const { title, completed, deadline } = req.body;
   const updateFields = {};
@@ -55,12 +50,10 @@ router.put('/:id', auth, async (req, res) => {
   }
 
   try {
-  
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       console.log('Invalid Todo ID format:', req.params.id);
       return res.status(400).json({ msg: 'Invalid Todo ID' });
     }
-    
     let todo = await Todo.findById(req.params.id);
     if (!todo) {
       console.log('Todo not found for ID:', req.params.id);
@@ -86,8 +79,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 
-// @route    DELETE api/todos/:id
-// @desc     Delete a todo
+// Delete a todo
 router.delete('/:id', auth, async (req, res) => {
   try {
     console.log('Attempting to delete todo with ID:', req.params.id);

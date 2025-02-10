@@ -24,7 +24,7 @@ const LandingPage = () => {
       <section className="landing-content">
         <p>
           Manage your tasks efficiently and never miss a deadline. 
-          Whether you’re a busy professional or a student, our app helps you organize your tasks with ease.
+          Whether you're a busy professional or a student, our app helps you organize your tasks with ease.
         </p>
       </section>
       <button className="todo-btn" onClick={handleTodoClick}>

@@ -1,4 +1,3 @@
-// frontend/src/context/AuthContext.js
 import React, { createContext, useReducer, useEffect, useRef } from 'react';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
