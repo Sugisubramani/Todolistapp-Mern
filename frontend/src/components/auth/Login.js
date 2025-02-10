@@ -1,6 +1,33 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Navigate, Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
+// Inline, PasswordInput component
+const PasswordInput = ({ value, onChange, placeholder = "Enter your password", name, required }) => {
+  const [show, setShow] = useState(false);
+  return (
+    <div className="input-group">
+      <input
+        type={show ? "text" : "password"}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="form-control"
+        required={required}
+      />
+      <button
+        type="button"
+        className="btn btn-outline-secondary"
+        onClick={() => setShow(prev => !prev)}
+        aria-label="Toggle password visibility"
+      >
+        {show ? <FaEyeSlash /> : <FaEye />}
+      </button>
+    </div>
+  );
+};
 
 const Login = () => {
   const { state, login } = useContext(AuthContext);
@@ -39,17 +66,17 @@ const Login = () => {
             value={email}
             onChange={onChange}
             className="form-control"
+            placeholder="Enter your email"
             required
           />
         </div>
         <div className="mb-3">
           <label className="form-label">Password:</label>
-          <input
-            type="password"
+          <PasswordInput
             name="password"
             value={password}
             onChange={onChange}
-            className="form-control"
+            placeholder="Enter your password"
             required
           />
         </div>
